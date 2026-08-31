@@ -47,7 +47,8 @@ velofate/
 ├── pyproject.toml                 # meta-package definition & pinned dependencies
 ├── src/velofate/                  # importable package
 ├── slurm/
-│   └── fastq_to_velocity.sh       # raw FASTQ → velocity-ready .h5ad (kb-python nac workflow)
+│   └── 01_build_reference.sh      # build reference
+│   └── 02_generate_h5ad.sh        # raw FASTQ → velocity-ready .h5ad (kb-python nac workflow)
 ├── reference/
 │   └── t2g.txt                    # transcript-to-gene map (kb ref output, GRCh38)
 ├── notebooks/
