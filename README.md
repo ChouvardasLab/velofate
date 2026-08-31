@@ -105,7 +105,7 @@ build-backend = "hatchling.build"
 
 ```bash
 # Build the reference (once)
-kb ref -d human --workflow nac
+kb ref \ -d human \ --workflow nac \ -i index.idx \ -g t2g.txt \ -c1 spliced_t2c.txt \ -c2 unspliced_t2c.txt \ -f1 spliced.fa \ -f2 unspliced.fa
 
 # Quantify one sample
 kb count -i index.idx -g t2g.txt \
