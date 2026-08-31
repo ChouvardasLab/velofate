@@ -101,16 +101,20 @@ build-backend = "hatchling.build"
 
 ## 1. Raw FASTQ → velocity-ready matrices (SLURM)
 
-`slurm/fastq_to_velocity.sh` runs the quantification stage on an HPC cluster using `kb-python` v0.29.5's `nac` workflow, which produces spliced (mature) and unspliced (nascent) counts in a single pass:
+`slurm/01_build_reference.sh` and `slurm/02_generate_h5ad.sh` runs the quantification stage on an HPC cluster using `kb-python` v0.29.5's `nac` workflow, which produces spliced (mature) and unspliced (nascent) counts in a single pass:
 
 ```bash
 # Build the reference (once)
-kb ref \ -d human \ --workflow nac \ -i index.idx \ -g t2g.txt \ -c1 spliced_t2c.txt \ -c2 unspliced_t2c.txt \ -f1 spliced.fa \ -f2 unspliced.fa
+kb ref -d human --workflow nac \
+    -i index.idx -g t2g.txt \
+    -c1 spliced_t2c.txt -c2 unspliced_t2c.txt \
+    -f1 spliced.fa -f2 unspliced.fa
 
 # Quantify one sample
 kb count -i index.idx -g t2g.txt \
     -c1 spliced_t2c.txt -c2 unspliced_t2c.txt \
-    --workflow nac -x 10XV2 --filter bustools --h5ad -t 16 \
+    --workflow nac -x 10XV2 --filter bustools --h5ad
+    -o sample_output --t 16 \
     R1.fastq.gz R2.fastq.gz
 ```
 
