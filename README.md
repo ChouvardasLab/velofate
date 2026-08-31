@@ -22,7 +22,7 @@
 
 ## Overview
 
-Single-cell velocity/fate analysis usually lives as a loose chain of cluster scripts, ad hoc conda environments, and one giant notebook — hard for anyone but the original author to rerun. `velofate` packages that chain into two explicit stages:
+Single-cell velocity and fate analysis is often spread across multiple scripts, custom environments and large notebooks, making it difficult for others to reproduce. `velofate` organizes this workflow into two clear stages:
 
 1. **Quantification**: raw FASTQ → spliced/unspliced count matrices, run on an HPC cluster via SLURM.
 2. **Analysis**: QC, batch integration, RNA velocity, and CellRank fate mapping, run through the `velofate` package itself.
