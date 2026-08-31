@@ -135,4 +135,4 @@ Developed in the Chouvardas Lab (DBMR), University of Bern, under the supervisio
 
 ## License
 
-Not yet specified — for academic tooling like this, [MIT](https://choosealicense.com/licenses/mit/) or [BSD-3-Clause](https://choosealicense.com/licenses/bsd-3-clause/) are common, permissive choices. Add a `LICENSE` file at the repo root once decided.
+This project is licensed under the [MIT License](LICENSE).
