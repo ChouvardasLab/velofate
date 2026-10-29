@@ -46,9 +46,6 @@ flowchart LR
 velofate/
 ├── pyproject.toml                 # meta-package definition & pinned dependencies
 ├── src/velofate/                  # importable package
-├── slurm/
-│   └── 01_build_reference.sh      # build reference
-│   └── 02_generate_h5ad.sh        # raw FASTQ → velocity-ready .h5ad (kb-python nac workflow)
 ├── environment/
 │   ├── environment.yml            # micromamba environment and dependencies
 │   └── requirements.txt           # python package dependencies
@@ -57,6 +54,9 @@ velofate/
 │   └── quickstart_example.ipynb   # minimal end-to-end example on a small demo dataset
 ├── reference/
 │   └── t2g.txt                    # transcript-to-gene map (kb ref output, GRCh38)
+├── slurm/
+│   └── 01_build_reference.sh      # build reference
+│   └── 02_generate_h5ad.sh        # raw FASTQ → velocity-ready .h5ad (kb-python nac workflow)
 └── README.md
 ```
 
