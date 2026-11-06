@@ -44,7 +44,6 @@ flowchart LR
 
 ```
 velofate/
-├── src/velofate/                  # importable package
 ├── notebooks/
 │   ├── full_workflow.ipynb        # complete atlas analysis: QC → integration → velocity → fate
 │   └── quickstart_example.ipynb   # minimal end-to-end example on a small demo dataset
@@ -53,6 +52,8 @@ velofate/
 ├── slurm/
 │   └── 01_build_reference.sh      # build reference
 │   └── 02_generate_h5ad.sh        # raw FASTQ → velocity-ready .h5ad (kb-python nac workflow)
+├── src/velofate/                  # importable package
+├── LICENSE
 ├── README.md
 ├── environment.yml                # conda environment (Python + PETSc/SLEPc, then pip)
 ├── pyproject.toml                 # meta-package definition & pinned dependencies
