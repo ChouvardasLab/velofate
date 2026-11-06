@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.10,<3.11"
-authors = [{ name = "Luis" }]
+authors = [{ name = "Luis Ansorge" }]
 keywords = [
     "single-cell",
     "scRNA-seq",
@@ -27,7 +27,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3.10",
-    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Bioinformatics",
 ]
 
 # Versions are pinned to the exact environment the thesis analysis was run in
