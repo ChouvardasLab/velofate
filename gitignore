@@ -1,0 +1,46 @@
+# --- Python / packaging ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.benchmarks/
+
+# --- Environments ---
+.venv/
+venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Data (large; download from GEO GSE178481 instead) ---
+data/*
+!data/README.md
+# To ship a small demo dataset for the quickstart notebook, un-ignore it, e.g.:
+# !data/demo.h5ad
+
+# --- kb-python reference: keep only t2g.txt ---
+reference/*
+!reference/t2g.txt
+
+# --- Sequencing & quantification outputs ---
+*.fastq
+*.fastq.gz
+*.fq.gz
+*.bus
+*.idx
+counts_unfiltered/
+counts_filtered/
+
+# --- SLURM logs ---
+slurm-*.out
+slurm-*.err
+*.log
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
