@@ -44,7 +44,6 @@ flowchart LR
 
 ```
 velofate/
-├── pyproject.toml                 # meta-package definition & pinned dependencies
 ├── src/velofate/                  # importable package
 ├── environment/
 │   ├── environment.yml            # micromamba environment and dependencies
@@ -57,7 +56,8 @@ velofate/
 ├── slurm/
 │   └── 01_build_reference.sh      # build reference
 │   └── 02_generate_h5ad.sh        # raw FASTQ → velocity-ready .h5ad (kb-python nac workflow)
-└── README.md
+├── README.md
+└── pyproject.toml                 # meta-package definition & pinned dependencies
 ```
 
 ## Installation
