@@ -65,7 +65,29 @@ velofate/
 ```bash
 git clone https://github.com/ChouvardasLab/velofate.git
 cd velofate
-pip install -e .
+pip install -e ".[notebooks]"
+```
+
+Optional extras:
+ 
+| Extra | Installs | Use for |
+|---|---|---|
+| `notebooks` | ipykernel, ipywidgets | running the workflow notebooks |
+| `quant` | kb-python 0.29.5 | the FASTQ → `.h5ad` SLURM step (best kept in its own environment) |
+| `petsc` | mpi4py, petsc4py, slepc4py | faster CellRank/pyGPCCA solvers on large datasets |
+| `dev` | pytest | testing |
+ 
+The PETSc/SLEPc solvers compile from source under pip, so install them with conda instead:
+ 
+```bash
+conda install -c conda-forge petsc4py slepc4py mpi4py
+```
+ 
+Check that your environment matches the validated stack:
+ 
+```python
+import velofate
+velofate.versions()
 ```
 
 Because `velofate` is a meta-package, this single command pulls in the exact tool stack the pipeline was built and validated against, no separate environment-hunting required.
@@ -74,34 +96,7 @@ Because `velofate` is a meta-package, this single command pulls in the exact too
 
 `pyproject.toml` pins the specific releases of every tool the pipeline depends on, so results stay reproducible as the single-cell ecosystem moves fast underneath it.
 
-```toml
-[project]
-name = "velofate"
-version = "0.1.0"
-description = "Meta-package bundling the scRNA-seq -> RNA velocity -> cell-fate workflow (kb-python, scanpy, BBKNN, scVelo, CellRank) into one reproducible environment."
-readme = "README.md"
-requires-python = ">=3.10,<3.11"
-license = { text = "MIT" }
-authors = [{ name = "Luis Ansorge", email = "luis.ansorge@students.unibe.ch" }]
-
-dependencies = [
-    "kb-python==0.29.5",
-    "scanpy==1.10.4",
-    "bbknn==1.6.0",
-    "scvelo==0.3.4",
-    "cellrank",        # pin to the version validated against this pipeline
-    "anndata",
-    "leidenalg",
-    "python-igraph",
-]
-
-[project.optional-dependencies]
-dev = ["jupyter", "ipykernel", "pytest"]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-```
+This is the core of the repo. `velofate` contains no analysis code of its own — its job is to pin the exact releases of every tool the workflow uses (scanpy 1.10.4, BBKNN 1.6.0, scVelo 0.3.4, CellRank 2.0.7 and their numerical backbone), taken directly from the environment the thesis results were produced in. Installing it reproduces that environment in one step, so results stay reproducible as the single-cell ecosystem moves on underneath it.
 
 ## 1. Raw FASTQ → velocity-ready matrices (SLURM)
 
