@@ -1,0 +1,115 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "velofate"
+version = "0.1.0"
+description = "Meta-package bundling a single-cell RNA-seq -> RNA velocity -> cell-fate workflow (scanpy, BBKNN, scVelo, CellRank) into one reproducible environment."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10,<3.11"
+authors = [{ name = "Luis" }]
+keywords = [
+    "single-cell",
+    "scRNA-seq",
+    "RNA velocity",
+    "cell fate",
+    "trajectory inference",
+    "scvelo",
+    "cellrank",
+    "bioinformatics",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+# Versions are pinned to the exact environment the thesis analysis was run in
+# (Python 3.10.20, Linux HPC). Only packages the workflow uses directly are listed;
+# everything else is resolved transitively.
+dependencies = [
+    # --- Core single-cell stack ---
+    "anndata==0.11.4",
+    "scanpy==1.10.4",
+    "h5py==3.16.0",
+    "loompy==3.0.8",
+
+    # --- Integration, graph & clustering ---
+    "bbknn==1.6.0",
+    "annoy==1.17.3",
+    "leidenalg==0.11.0",
+    "igraph==1.0.0",
+    "umap-learn==0.5.12",
+    "pynndescent==0.5.13",
+
+    # --- RNA velocity & cell fate ---
+    "scvelo==0.3.4",
+    "cellrank==2.0.7",
+    "pygpcca==1.0.4",
+    "pygam==0.12.0",
+
+    # --- Annotation & malignancy (CNV) inference ---
+    "celltypist==1.7.1",
+    "infercnvpy==0.6.1",
+
+    # --- Gene ID mapping & metadata I/O ---
+    "pybiomart==0.2.0",
+    "gtfparse==2.6.3",
+    "pyreadr==0.5.6",
+    "openpyxl==3.1.5",
+
+    # --- Numerics (numpy 2.x was the version actually active at runtime) ---
+    "numpy==2.2.6",
+    "scipy==1.15.2",
+    "pandas==2.3.3",
+    "scikit-learn==1.7.2",
+    "statsmodels==0.14.6",
+    "numba==0.65.0",
+    "networkx==3.4",
+
+    # --- Plotting ---
+    "matplotlib==3.10.8",
+    "seaborn==0.13.2",
+    "adjustText==1.4.0",
+
+    # --- Reproducibility reporting ---
+    "session-info==1.0.0",
+]
+
+[project.optional-dependencies]
+# Jupyter kernel + widgets for running the workflow notebooks
+notebooks = [
+    "ipykernel==7.2.0",
+    "ipywidgets==8.1.8",
+]
+# Upstream FASTQ quantification (the SLURM step). This ran in a separate
+# environment from the analysis stack, so it is kept optional.
+quant = [
+    "kb-python==0.29.5",
+]
+# PETSc/SLEPc solvers used by CellRank/pyGPCCA for large Schur decompositions.
+# These compile from source via pip; installing them with conda is strongly
+# recommended instead (see README).
+petsc = [
+    "mpi4py==4.1.1",
+    "petsc4py==3.25.0",
+    "slepc4py==3.25.0",
+]
+dev = [
+    "pytest==9.0.3",
+    "pytest-benchmark==5.2.3",
+]
+all = ["velofate[notebooks,quant,dev]"]
+
+[project.urls]
+Repository = "https://github.com/ChouvardasLab/velofate"
+Issues = "https://github.com/ChouvardasLab/velofate/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/velofate"]
