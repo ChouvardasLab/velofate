@@ -15,12 +15,6 @@ env/
 # --- Jupyter ---
 .ipynb_checkpoints/
 
-# --- Data (large; download from GEO GSE178481 instead) ---
-data/*
-!data/README.md
-# To ship a small demo dataset for the quickstart notebook, un-ignore it, e.g.:
-# !data/demo.h5ad
-
 # --- kb-python reference: keep only t2g.txt ---
 reference/*
 !reference/t2g.txt
