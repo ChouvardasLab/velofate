@@ -61,33 +61,40 @@ velofate/
 
 ## Installation
 
+Requires Linux and conda (Miniconda or Anaconda).
+
+**1. Download the repository**
 ```bash
 git clone https://github.com/ChouvardasLab/velofate.git
 cd velofate
-pip install -e ".[notebooks]"
 ```
 
-Optional extras:
- 
-| Extra | Installs | Use for |
-|---|---|---|
-| `notebooks` | ipykernel, ipywidgets | running the workflow notebooks |
-| `quant` | kb-python 0.29.5 | the FASTQ → `.h5ad` SLURM step (best kept in its own environment) |
-| `petsc` | mpi4py, petsc4py, slepc4py | faster CellRank/pyGPCCA solvers on large datasets |
-| `dev` | pytest | testing |
- 
-The PETSc/SLEPc solvers compile from source under pip, so install them with conda instead:
- 
+**2. Create the environment** (installs Python 3.10, all pinned packages and velofate itself)
 ```bash
-conda install -c conda-forge petsc4py slepc4py mpi4py
+conda env create -f environment.yml
+conda activate velofate
 ```
- 
-Check that your environment matches the validated stack:
- 
-```python
-import velofate
-velofate.versions()
+
+**3. Check the installation**
+```bash
+python -c "import velofate; velofate.versions()"
 ```
+
+**4. Use it in Jupyter or VS Code**
+```bash
+python -m ipykernel install --user --name velofate --display-name "velofate"
+```
+Then open a notebook from `notebooks/` and select the **velofate** kernel.
+
+<details>
+<summary>Without conda (pip only)</summary>
+
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+This skips the optional PETSc/SLEPc solvers, which only speed up CellRank on large datasets.
+</details>
 
 Because `velofate` is a meta-package, this single command pulls in the exact tool stack the pipeline was built and validated against, no separate environment-hunting required.
 
